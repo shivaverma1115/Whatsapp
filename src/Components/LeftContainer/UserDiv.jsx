@@ -1,19 +1,24 @@
 import { Avatar, Box, Divider, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import {  useSelector } from 'react-redux'
 
-const UserDiv = () => {
+const UserDiv = ({id,lastText,lastTextTime,name,profilePic,}) => {
+    const userName=()=>{
+        localStorage.setItem("userName",JSON.stringify(name)) ;
+        console.log(name) ;
+    }
     return (
-        <Box _hover={{bg:"#f0f2f5"}}>
+        <Box _hover={{bg:"#f0f2f5"}}cursor={'pointer'} onClick={()=>userName()}>
             <Divider />
             <Flex h={20} justifyContent={"space-around"} >
                 <Box my={"auto"} >
-                    <Avatar m={"auto"} src='https://pps.whatsapp.net/v/t61.24694-24/322278872_195464603182232_8418120309601235942_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AdS-l_srQi2-Buy7pvBWPIUrWJJk6RBNCLQg6sD7YoNH0g&oe=64AFA9CD' />
+                    <Avatar m={"auto"} src={profilePic} />
                 </Box>
-                <Box textAlign={'left'} >
-                    <Text fontSize={25}>Shiva Verma</Text>
-                    <Text>mst bn rha h</Text>
+                <Box textAlign={'left'} my={"auto"}>
+                    <Text fontSize={20}>{name}</Text>
+                    <Text>{lastText}</Text>
                 </Box>
-                <Text >12:00 Pm</Text>
+                <Text my={"auto"}>{lastTextTime}</Text>
             </Flex>
         </Box>
     )

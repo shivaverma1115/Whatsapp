@@ -2,31 +2,31 @@ import { useState } from "react";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
-export const getAllData = createAsyncThunk("DataUsers",async()=>{
-    const res = await fetch(`https://whatsapp-database.onrender.com/contactList`) ;
+export const getAllMassage = createAsyncThunk("MassageData",async()=>{
+    const res = await fetch(`https://whatsapp-database.onrender.com/massage`) ;
     const ans =  res.json() ;
     return ans ;
 })
-export const DataUser = createSlice({
-    name:"DataUser",
+export const MassageData = createSlice({
+    name:"MassageData",
     initialState:{
         user:[],
         loading:false,
         error:false 
     },
     extraReducers :{
-        [getAllData.pending] : (state)=>{
+        [getAllMassage.pending] : (state)=>{
             state.loading = true ;
         },
-        [getAllData.fulfilled] : (state,action)=>{
+        [getAllMassage.fulfilled] : (state,action)=>{
             state.loading = false ;
             state.user = action.payload ;
         },
-        [getAllData.rejected] : (state,action)=>{
+        [getAllMassage.rejected] : (state,action)=>{
             state.loading = false ;
             state.error = action.payload ;
         }
     }
 })
 
-export default DataUser.reducer ;
+export default MassageData.reducer ;

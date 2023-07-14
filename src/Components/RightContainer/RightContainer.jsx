@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import UserHeader from './UserHeader'
 import { Box } from '@chakra-ui/react'
 import RightInput from './RightInput'
 import ChatSection from './ChatSection'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 const RightContainer = () => {
-  const [massage, setMassage] = useState([]);
-  const getData = () => {
-    axios.get(`https://whatsapp-database.onrender.com/messagesList`)
-      .then((res) => {
-        //  console.log(res.data);
-        setMassage(res.data);
-      })
-      .catch((error) => {
-        //  console.log(error);
-      });
-  }
-  const name = JSON.parse((localStorage.getItem("userName"))) ;
-  useEffect(() => {
-    getData();
-  }, [name])
-  localStorage.setItem("massage", JSON.stringify(massage));
 
+  const data = useSelector((state) => {
+    return state.redux.Massage.user;
+  });
+
+  
+  const id = JSON.parse(localStorage.getItem("id"));
 
   return (
-    <Box width={"70%"}>
-      <UserHeader />
-      <ChatSection/>
-      <RightInput />
+    <Box width={"100%"} >
+      {
+        data.map((ele, i) => {
+          if (id == ele.id) {
+            return (
+            <Box key={i}>
+              <UserHeader ele={ele}/>
+              <ChatSection />
+            </Box>
+            )
+          }
+        })
+      }
     </Box>
   )
 }
-
 export default RightContainer

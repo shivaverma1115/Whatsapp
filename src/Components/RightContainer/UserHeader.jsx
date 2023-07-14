@@ -1,16 +1,18 @@
 import React from 'react'
-import { Avatar, Box, Flex, Spacer } from "@chakra-ui/react";
-import { MdGroups3 } from 'react-icons/md';
-import { GoCircle } from 'react-icons/go';
-import { BsFillChatRightTextFill } from 'react-icons/bs';
+import { Avatar, Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import { AiOutlineMore } from 'react-icons/ai';
 import { AiOutlineSearch } from "react-icons/ai"
+import { useDispatch, useSelector } from 'react-redux';
 
-const UserHeader = () => {
+const UserHeader = ({ ele }) => {
+  const avatar = JSON.parse(localStorage.getItem("avatar")) ;
   return (
     <Flex bg={'#f0f2f5'} >
       <Box mx={10} my={2}>
-        <Avatar m={"auto"} src='https://pps.whatsapp.net/v/t61.24694-24/322278872_195464603182232_8418120309601235942_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AdS-l_srQi2-Buy7pvBWPIUrWJJk6RBNCLQg6sD7YoNH0g&oe=64AFA9CD' />
+        <Flex >
+          <Avatar m={"auto"} src={avatar} />
+          <Text m={'auto'} px={5} fontWeight={700}>{ele.name}</Text>
+        </Flex>
       </Box>
       <Spacer />
       <Flex m={"auto"} w={"50%"} px={5} fontSize={25} justifyContent={'right'}>
